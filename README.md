@@ -94,3 +94,12 @@ So that **I can see which topics and cities near me are interesting.**
 Given the user has not entered a city to search for  
 When the user clicks on a “visualization” button  
 Then graphs comparing the types and numbers of events in each city will be shown to the user
+
+
+## Utilizing serverless functions
+
+This application harnesses the capabilities of serverless functions to efficiently handle all its essential tasks, such as interaction with the Google Calendar API, event filtering (by city or by how many to display) and visualization.
+
+With serverless architecture, there is no need for a dedicated server to run continuously, ensuring optimal resource allocation. It enables the app to operate on-demand, activating the necessary functions precisely when required, thus reducing unnecessary overhead. If the app experiences fluctuations in user demand, serverless functions automatically adjust to the workload, seamlessly accommodating higher traffic without any manual intervention.
+
+Furthermore, with serverless computing, updates and maintenance are taken care of by the cloud provider, allowing to focus on providing an exceptional and reliable application with sound business logic.
