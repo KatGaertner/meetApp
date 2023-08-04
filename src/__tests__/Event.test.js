@@ -4,11 +4,13 @@ import { getEvents } from "../api";
 import userEvent from "@testing-library/user-event";
 
 describe("<Event /> component", () => {
-  let EventComponent, allEvents;
+  let EventComponent, allEvents, descriptionRegEx;
 
   beforeEach(async () => {
     allEvents = await getEvents();
     EventComponent = render(<Event event={allEvents[0]} />);
+    //using a part of the description's string as a regex because the description is multiline
+    descriptionRegEx = /Have you wondered how you can/;
   });
 
   test("renders event title", () => {
@@ -34,8 +36,6 @@ describe("<Event /> component", () => {
   });
 
   test("by default, details section should be hidden", () => {
-    //using a part of the description's string as a regex because the description is multiline
-    const descriptionRegEx = /Have you wondered how you can/;
     expect(
       EventComponent.queryByText(descriptionRegEx)
     ).not.toBeInTheDocument();
@@ -51,8 +51,6 @@ describe("<Event /> component", () => {
 
   test("shows details on a click to 'show details'", async () => {
     const user = userEvent.setup();
-    //using a part of the description's string as a regex because the description is multiline
-    const descriptionRegEx = /Have you wondered how you can/;
     const showButton = EventComponent.queryByText("show details");
     await user.click(showButton);
     expect(EventComponent.queryByText(descriptionRegEx)).toBeInTheDocument();
@@ -60,7 +58,6 @@ describe("<Event /> component", () => {
 
   test("hides details on a click to 'hide details'", async () => {
     const user = userEvent.setup();
-    const descriptionRegEx = /Have you wondered how you can/;
     const hideButton = EventComponent.queryByText("hide details");
     await user.click(hideButton);
     expect(
