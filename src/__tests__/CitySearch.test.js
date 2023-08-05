@@ -24,6 +24,7 @@ describe("<CitySearch /> component", () => {
 
   test("renders a list of suggestions when city textbox gains focus", async () => {
     const user = userEvent.setup();
+    CitySearchComponent.rerender(<CitySearch allLocations={[]} />);
     const cityTextBox = CitySearchComponent.queryByRole("textbox");
     await user.click(cityTextBox);
     const suggestionList = CitySearchComponent.queryByRole("list");
@@ -44,9 +45,9 @@ describe("<CitySearch /> component", () => {
     // filter allLocations to locations matching "Berlin"
     const suggestions = allLocations
       ? allLocations.filter((location) => {
-          return (
-            location.toUpperCase().indexOf(cityTextBox.value.toUpperCase()) > -1
-          );
+          return location
+            .toUpperCase()
+            .includes(cityTextBox.value.toUpperCase());
         })
       : [];
 

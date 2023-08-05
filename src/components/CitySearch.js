@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const CitySearch = ({ allLocations = [], setCurrentCity }) => {
+const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -8,14 +8,14 @@ const CitySearch = ({ allLocations = [], setCurrentCity }) => {
   const handleInputChanged = (event) => {
     const value = event.target.value;
     const filteredLocations = allLocations.filter((location) => {
-      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+      return location.toUpperCase().includes(value.toUpperCase());
     });
 
     setQuery(value);
     setSuggestions(filteredLocations);
   };
 
-  const handleItemClicked = (event) => {
+  const handleCityClicked = (event) => {
     const value = event.target.textContent;
     setQuery(value);
     setShowSuggestions(false);
@@ -40,12 +40,12 @@ const CitySearch = ({ allLocations = [], setCurrentCity }) => {
         <ul className="suggestions">
           {suggestions.map((suggestion) => {
             return (
-              <li onClick={handleItemClicked} key={suggestion}>
+              <li onClick={handleCityClicked} key={suggestion}>
                 {suggestion}
               </li>
             );
           })}
-          <li key="See all cities" onClick={handleItemClicked}>
+          <li key="See all cities" onClick={handleCityClicked}>
             <b>See all cities</b>
           </li>
         </ul>

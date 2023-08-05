@@ -26,7 +26,7 @@ const App = () => {
   }, [currentCity]);
 
   return (
-    <div className="App">
+    <div className="app">
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
       <NumberOfEvents />
       <EventList events={events} />

@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const Event = ({ event }) => {
-  const [isExpanded, setExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleDetails = () => {
-    setExpanded(!isExpanded);
+    setIsExpanded(!isExpanded);
   };
 
   return (
