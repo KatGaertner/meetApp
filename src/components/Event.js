@@ -8,12 +8,17 @@ const Event = ({ event }) => {
   };
 
   return (
-    <li>
-      <p>{event.summary}</p>
-      <p>{event.start.dateTime}</p>
-      <p>{event.location}</p>
-      {isExpanded ? <p>{event.description}</p> : null}
-      <button onClick={toggleDetails}>
+    <li className="event">
+      <p className="title">{event.summary}</p>
+      <p>
+        {new Date(event.start.dateTime).toLocaleString(undefined, {
+          dateStyle: "medium",
+          timeStyle: "short",
+        })}
+      </p>
+      <p className="city">{event.location}</p>
+      {isExpanded ? <p className="description">{event.description}</p> : null}
+      <button className="details-btn" onClick={toggleDetails}>
         {isExpanded ? "hide details" : "show details"}
       </button>
     </li>
