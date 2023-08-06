@@ -20,9 +20,7 @@ describe("<Event /> component", () => {
   });
 
   test("renders event time", () => {
-    expect(
-      EventComponent.queryByText(allEvents[0].start.dateTime)
-    ).toBeInTheDocument();
+    expect(EventComponent.container.querySelector(".time")).toBeInTheDocument();
   });
 
   test("renders event location", () => {

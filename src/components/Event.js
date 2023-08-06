@@ -10,7 +10,7 @@ const Event = ({ event }) => {
   return (
     <li className="event">
       <p className="title">{event.summary}</p>
-      <p>
+      <p className="time">
         {new Date(event.start.dateTime).toLocaleString(undefined, {
           dateStyle: "medium",
           timeStyle: "short",
