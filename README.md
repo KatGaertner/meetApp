@@ -20,9 +20,11 @@ When the user starts typing in the city box
 Then a list of matching cities is suggested
 
 **Scenario 3**: User can select a city from the suggested list.  
-Given the user has typed in the city box and a list of suggested cities is shown  
+Given the user has typed in the city box
+And a list of suggested cities is shown  
 When the user selects a suggestion  
 Then that city as set as the user’s city
+And the user should receive a list of upcoming events in that city
 
 ### Feature 2: Show/Hide Event Details
 As a **user**  
