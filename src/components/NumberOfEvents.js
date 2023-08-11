@@ -17,6 +17,8 @@ const NumberOfEvents = ({ setCurrentNOE }) => {
         onChange={(event) => {
           handleNumberChange(event);
         }}
+        min="1"
+        max="999"
       />
     </div>
   );
