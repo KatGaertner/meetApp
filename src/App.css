@@ -10,6 +10,26 @@
   font-family: 'Rubik', sans-serif;
 }
 
+@media screen and (max-width: 811px) {
+  .alerts-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    position: relative;
+    width: 250px;
+  }
+}
+
+@media screen and (min-width: 812px) {
+  .alerts-container {
+    position: fixed;
+    top: 0px;
+    left: 20px;
+    width: 250px;
+    z-index: 1000;
+  }
+}
+
 ul {
   padding: 0;
   list-style: none;

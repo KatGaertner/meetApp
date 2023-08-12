@@ -22,7 +22,7 @@ describe("<NumberOfEvents /> component", () => {
   test("changes value when user types in it", async () => {
     const user = userEvent.setup();
     NumberOfEventsComponent.rerender(
-      <NumberOfEvents setCurrentNOE={() => {}} />
+      <NumberOfEvents setCurrentNOE={() => {}} setErrorAlert={() => {}} />
     );
     await user.type(numberBox, "{backspace}{backspace}10");
     expect(numberBox.value).toEqual("10");
