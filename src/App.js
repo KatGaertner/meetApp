@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CitySearch from "./components/CitySearch";
 import EventList from "./components/EventList";
 import NumberOfEvents from "./components/NumberOfEvents";
-import { InfoAlert, ErrorAlert } from "./components/Alert";
+import { InfoAlert, ErrorAlert, WarningAlert } from "./components/Alert";
 import { getEvents, extractLocations } from "./api";
 import "./App.css";
 
@@ -14,8 +14,16 @@ const App = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [infoAlert, setInfoAlert] = useState("");
   const [errorAlert, setErrorAlert] = useState("");
+  const [warningAlert, setWarningAlert] = useState("");
 
   const fetchData = async () => {
+    if (navigator.onLine) {
+      setWarningAlert("");
+    } else {
+      setWarningAlert(
+        "No internet connection. Showing offline data, events might not me up-to-date."
+      );
+    }
     const data = await getEvents();
     if (data) {
       setAllEvents(data);
@@ -51,6 +59,7 @@ const App = () => {
         setErrorAlert={setErrorAlert}
       />
       <div className="alerts-container">
+        {warningAlert.length ? <WarningAlert text={warningAlert} /> : null}
         {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
         {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
       </div>
