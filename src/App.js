@@ -14,7 +14,9 @@ const App = () => {
 
   const fetchData = async () => {
     const data = await getEvents();
-    setAllEvents(data);
+    if (data) {
+      setAllEvents(data);
+    }
   };
 
   const setData = async () => {
