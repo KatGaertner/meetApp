@@ -16,21 +16,16 @@ const App = () => {
   const [errorAlert, setErrorAlert] = useState("");
   const [warningAlert, setWarningAlert] = useState("");
 
-  const fetchData = async () => {
-    if (navigator.onLine) {
-      setWarningAlert("");
-    } else {
-      setWarningAlert(
-        "No internet connection. Showing offline data, events might not me up-to-date."
-      );
+  const updateEvents = async () => {
+    if (allEvents.length === 0) {
+      const data = await getEvents();
+      if (data.length > 0) {
+        setAllEvents(data);
+      } else {
+        setWarningAlert("Could not fetch events.");
+      }
     }
-    const data = await getEvents();
-    if (data) {
-      setAllEvents(data);
-    }
-  };
 
-  const setData = async () => {
     const filteredEvents =
       currentCity === "See all cities"
         ? allEvents
@@ -40,11 +35,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    setData();
+    if (navigator.onLine) {
+      setWarningAlert("");
+    } else {
+      setWarningAlert(
+        "No internet connection. Showing offline data, events might not me up-to-date."
+      );
+    }
+    updateEvents();
   }, [currentCity, currentNOE, allEvents]);
 
   return (
