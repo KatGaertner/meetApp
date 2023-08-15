@@ -1,4 +1,4 @@
-import { render, within } from "@testing-library/react";
+import { render, within, waitFor } from "@testing-library/react";
 import { extractLocations, getEvents } from "../api";
 import userEvent from "@testing-library/user-event";
 import CitySearch from "../components/CitySearch";
@@ -99,8 +99,10 @@ describe("<CitySearch /> integration", () => {
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
 
-    const suggestionListItems =
-      within(CitySearchDOM).queryAllByRole("listitem");
-    expect(suggestionListItems.length).toBe(allLocations.length + 1);
+    await waitFor(() => {
+      const suggestionListItems =
+        within(CitySearchDOM).queryAllByRole("listitem");
+      expect(suggestionListItems.length).toBe(allLocations.length + 1);
+    });
   });
 });
