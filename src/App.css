@@ -137,3 +137,26 @@ input[type="number"] {
   padding: 0 10px;
   background-color: white;
 }
+
+.loadingspinner {
+  margin: auto;
+  width: 50%;
+  pointer-events: none;
+  width: 2.5em;
+  height: 2.5em;
+  border: 0.4em solid transparent;
+  border-color: #ccc;
+  border-top-color: #3d82c0;
+  border-radius: 50%;
+  animation: loadingspin 1s linear infinite;
+}
+
+@keyframes loadingspin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+.hidden {
+  display: none;
+}

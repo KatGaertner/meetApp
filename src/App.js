@@ -17,10 +17,12 @@ const App = () => {
   const [infoAlert, setInfoAlert] = useState("");
   const [errorAlert, setErrorAlert] = useState("");
   const [warningAlert, setWarningAlert] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   const updateEvents = async () => {
     if (allEvents.length === 0) {
       const data = await getEvents();
+      setLoading(false);
       if (data.length > 0) {
         setAllEvents(data);
       } else {
@@ -63,11 +65,15 @@ const App = () => {
         {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
         {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
       </div>
+      {isLoading ? (
+        <div className="loadingspinner" role="status">
+          <span className="hidden">Loading...</span>
+        </div>
+      ) : null}
       <div className="charts-container">
         <EventGenresChart events={events} />
         <CityEventsChart allLocations={allLocations} events={events} />
       </div>
-
       <EventList events={events} />
     </div>
   );
