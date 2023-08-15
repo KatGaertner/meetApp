@@ -27,6 +27,22 @@ const CityEventsChart = ({ allLocations, events }) => {
     return data;
   };
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{payload[0].value}</p>
+          <p>
+            {payload[1].value}
+            {payload[1].value === 1 ? " event" : " events"}
+          </p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <ResponsiveContainer width="99%" height={400}>
       <ScatterChart
@@ -51,11 +67,12 @@ const CityEventsChart = ({ allLocations, events }) => {
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
           isAnimationActive={false}
+          content={<CustomTooltip />}
         />
         <Scatter
           name="A school"
           data={data}
-          fill="#8884d8"
+          fill="#3d82c0"
           isAnimationActive={false}
         />
       </ScatterChart>
