@@ -90,6 +90,18 @@ input[type="number"] {
   background-color: #bcdcdb;
 }
 
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 .event {
   padding: 10px 10px 40px;
   margin-bottom: 10px;
