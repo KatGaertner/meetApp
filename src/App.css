@@ -135,4 +135,5 @@ input[type="number"] {
 .custom-tooltip {
   border: solid 2px #ccc;
   padding: 0 10px;
+  background-color: white;
 }
