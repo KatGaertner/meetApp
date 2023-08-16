@@ -66,9 +66,10 @@ const App = () => {
         {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
       </div>
       {isLoading ? (
-        <div className="loadingspinner" role="status">
+        <>
+          <div className="loadingspinner" role="status"></div>
           <span className="hidden">Loading...</span>
-        </div>
+        </>
       ) : null}
       <div className="charts-container">
         <EventGenresChart events={events} />
