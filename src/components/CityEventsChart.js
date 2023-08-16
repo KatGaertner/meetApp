@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const CityEventsChart = ({ allLocations, events }) => {
+const CityEventsChart = ({ allLocations, events, isLoading }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -54,7 +54,8 @@ const CityEventsChart = ({ allLocations, events }) => {
         }}
         isAnimationActive={false}
       >
-        <CartesianGrid />
+        {/* wait for loading to complete so there is no grey box */}
+        {isLoading ? null : <CartesianGrid />}
         <XAxis
           type="category"
           dataKey="city"
