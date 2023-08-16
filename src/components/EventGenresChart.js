@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from "recharts";
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Tooltip,
+  Cell,
+  LabelList,
+  Legend,
+} from "recharts";
 
 const EventGenresChart = ({ events }) => {
   const [data, setData] = useState([]);
@@ -9,15 +17,37 @@ const EventGenresChart = ({ events }) => {
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
+      const sumEvents = data.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.value,
+        0
+      );
+      const percent = ((payload[0].value / sumEvents) * 100).toFixed(0);
       return (
-        <div className="custom-tooltip">
+        <div
+          className="custom-tooltip"
+          style={{ borderColor: payload[0].payload.fill }}
+        >
           <p className="label">{payload[0].name}</p>
           <p>
-            {payload[0].value} {payload[0].value === 1 ? " event" : " events"}
+            {percent}% ({payload[0].value}
+            {payload[0].value === 1 ? " event" : " events"})
           </p>
         </div>
       );
     }
+  };
+
+  const customPercentage = (cellData) => {
+    const total = data.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.value,
+      0
+    );
+    let percentageCalculated = (cellData.value / total) * 100;
+    return percentageCalculated.toFixed(0).toString() + "%";
+  };
+
+  const customLabel = (piePiece) => {
+    return piePiece.name;
   };
 
   const getData = () => {
@@ -33,53 +63,28 @@ const EventGenresChart = ({ events }) => {
     return data;
   };
 
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = outerRadius;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.1;
-    const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.1;
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="black"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${genres[index]}: ${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
-
   useEffect(() => {
     setData(getData());
   }, [`${data}`, events]);
 
   return (
-    <ResponsiveContainer width="99%" height={400}>
-      <PieChart margin={{ top: 5, left: 5, right: 5, bottom: 70 }}>
+    <ResponsiveContainer width="99%" height={320}>
+      <PieChart margin={{ top: 5, left: 5, right: 5, bottom: 5 }}>
         <Pie
           data={data}
           dataKey="value"
           fill="#8884d8"
           labelLine={false}
-          label={renderCustomizedLabel}
-          outerRadius={110}
+          label={customLabel}
+          outerRadius={100}
           isAnimationActive={false}
         >
+          <LabelList fill="white" dataKey={customPercentage} stroke="none" />
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Legend layout="horizontal" verticalAlign="bottom" />
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
           isAnimationActive={false}
