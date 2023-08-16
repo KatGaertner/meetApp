@@ -16,13 +16,20 @@ const EventGenresChart = ({ events, isLoading }) => {
   const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
   const COLORS = ["#0fb5af", "#4147cb", "#f78511", "#df3d83", "#7f85fb"];
 
+  const nonZero = (data) =>
+    data.filter((genre) => genre.value > 0).map((el) => el.name);
+
+  const sumEvents = (data) =>
+    data.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.value,
+      0
+    );
+
+  const percent = (value, data) =>
+    ((value / sumEvents(data)) * 100).toFixed(0).toString() + "%";
+
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      const sumEvents = data.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.value,
-        0
-      );
-      const percent = ((payload[0].value / sumEvents) * 100).toFixed(0);
       return (
         <div
           className="custom-tooltip"
@@ -30,7 +37,7 @@ const EventGenresChart = ({ events, isLoading }) => {
         >
           <p className="label">{payload[0].name}</p>
           <p>
-            {percent}% ({payload[0].value}
+            {percent(payload[0].value, data)} ({payload[0].value}{" "}
             {payload[0].value === 1 ? " event" : " events"})
           </p>
         </div>
@@ -39,16 +46,17 @@ const EventGenresChart = ({ events, isLoading }) => {
   };
 
   const customPercentage = (cellData) => {
-    const total = data.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.value,
-      0
-    );
-    let percentageCalculated = (cellData.value / total) * 100;
-    return percentageCalculated.toFixed(0).toString() + "%";
+    if (nonZero(data).includes(cellData.name)) {
+      return percent(cellData.value, data);
+    }
+    return null;
   };
 
   const customLabel = (piePiece) => {
-    return piePiece.name;
+    if (nonZero(data).includes(piePiece.name)) {
+      return piePiece.name;
+    }
+    return null;
   };
 
   const getData = () => {
@@ -61,7 +69,7 @@ const EventGenresChart = ({ events, isLoading }) => {
         value: filteredEvents.length,
       };
     });
-    return data.filter((genre) => genre.value > 0);
+    return data;
   };
 
   useEffect(() => {
