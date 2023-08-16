@@ -12,6 +12,14 @@ The app is currently deployed on [deployed on GitHub Pages](https://katgaertner.
 - Visualizes event details for enhanced user experience.
 - Progressive Web App (PWA): Download and use the app offline with locally saved data.
 
+## Screenshots
+<a href="https://github.com/KatGaertner/meetApp/blob/main/screenshots/mobile1.jpeg">
+<img src="https://github.com/KatGaertner/meetApp/blob/main/screenshots/mobile1.jpeg?raw=true" alt="Mobile screenshot" height="200px"/></a>
+<a href="https://github.com/KatGaertner/meetApp/blob/main/screenshots/mobile2.jpeg">
+<img src="https://github.com/KatGaertner/meetApp/blob/main/screenshots/mobile2.jpeg?raw=true" alt="Mobile screenshot" height="200px"/></a>
+<a href="https://github.com/KatGaertner/meetApp/blob/main/screenshots/desktop.png">
+<img src="https://github.com/KatGaertner/meetApp/blob/main/screenshots/desktop.png?raw=true" alt="Desktop screenshot" height="200px"/></a>
+
 ## Technologies
 
 This project utilizes:
