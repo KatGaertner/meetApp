@@ -54,18 +54,20 @@ const CityEventsChart = ({ allLocations, events, isLoading }) => {
         }}
         isAnimationActive={false}
       >
-        <text
-          x="50%"
-          y="0"
-          dy={25}
-          style={{ fontSize: 16, fontWeight: "bold" }}
-          scaleToFit={true}
-          textAnchor="middle"
-        >
-          Number of Events per City
-        </text>
-        {/* wait for loading to complete so there is no grey box */}
-        {isLoading ? null : <CartesianGrid />}
+        {isLoading ? null : (
+          <>
+            <CartesianGrid />
+            <text
+              x="50%"
+              y="0"
+              dy={25}
+              style={{ fontSize: 16, fontWeight: "bold" }}
+              textAnchor="middle"
+            >
+              Number of Events per City
+            </text>
+          </>
+        )}
         <XAxis
           type="category"
           dataKey="city"

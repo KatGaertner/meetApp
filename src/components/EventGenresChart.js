@@ -71,16 +71,21 @@ const EventGenresChart = ({ events, isLoading }) => {
   return (
     <ResponsiveContainer width="99%" height={400}>
       <PieChart margin={{ top: 35, left: 5, right: 5, bottom: 60 }}>
-        <text
-          x="50%"
-          y="0"
-          dy={25}
-          style={{ fontSize: 16, fontWeight: "bold" }}
-          scaleToFit={true}
-          textAnchor="middle"
-        >
-          Event Topics
-        </text>
+        {isLoading ? null : (
+          <>
+            <Legend layout="horizontal" verticalAlign="bottom" />
+            <text
+              x="50%"
+              y="0"
+              dy={25}
+              style={{ fontSize: 16, fontWeight: "bold" }}
+              textAnchor="middle"
+            >
+              Event Topics
+            </text>
+          </>
+        )}
+
         <Pie
           data={data}
           dataKey="value"
@@ -95,9 +100,6 @@ const EventGenresChart = ({ events, isLoading }) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        {isLoading ? null : (
-          <Legend layout="horizontal" verticalAlign="bottom" />
-        )}
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
           isAnimationActive={false}
