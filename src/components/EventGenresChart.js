@@ -9,7 +9,7 @@ import {
   Legend,
 } from "recharts";
 
-const EventGenresChart = ({ events }) => {
+const EventGenresChart = ({ events, isLoading }) => {
   const [data, setData] = useState([]);
 
   const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
@@ -84,7 +84,9 @@ const EventGenresChart = ({ events }) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Legend layout="horizontal" verticalAlign="bottom" />
+        {isLoading ? null : (
+          <Legend layout="horizontal" verticalAlign="bottom" />
+        )}
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
           isAnimationActive={false}

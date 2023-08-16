@@ -72,7 +72,7 @@ const App = () => {
         </>
       ) : null}
       <div className="charts-container">
-        <EventGenresChart events={events} />
+        <EventGenresChart events={events} isLoading={isLoading} />
         <CityEventsChart
           allLocations={allLocations}
           events={events}
