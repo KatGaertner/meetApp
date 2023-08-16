@@ -19,7 +19,11 @@ const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
   };
   return (
     <div id="number-of-events">
+      <label htmlFor="number-of-events-box" className="hidden">
+        Number of events
+      </label>
       <input
+        id="number-of-events-box"
         value={numberOfEvents}
         type="number"
         onChange={(event) => {

@@ -37,7 +37,11 @@ const CitySearch = ({ allLocations, setCurrentCity, setInfoAlert }) => {
 
   return (
     <div id="city-search">
+      <label htmlFor="city-search-box" className="hidden">
+        Search for a city
+      </label>
       <input
+        id="city-search-box"
         type="text"
         className="city"
         placeholder="Search for a city"
