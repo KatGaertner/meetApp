@@ -1,11 +1,24 @@
 import { useState, useEffect } from "react";
-import { ResponsiveContainer, PieChart, Pie, Legend, Cell } from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from "recharts";
 
 const EventGenresChart = ({ events }) => {
   const [data, setData] = useState([]);
 
   const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
   const COLORS = ["#0fb5af", "#4147cb", "#f78511", "#df3d83", "#7f85fb"];
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{payload[0].name}</p>
+          <p>
+            {payload[0].value} {payload[0].value === 1 ? " event" : " events"}
+          </p>
+        </div>
+      );
+    }
+  };
 
   const getData = () => {
     const data = genres.map((genre) => {
@@ -67,6 +80,11 @@ const EventGenresChart = ({ events }) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Tooltip
+          cursor={{ strokeDasharray: "3 3" }}
+          isAnimationActive={false}
+          content={<CustomTooltip />}
+        />
       </PieChart>
     </ResponsiveContainer>
   );
