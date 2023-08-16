@@ -61,7 +61,7 @@ const EventGenresChart = ({ events, isLoading }) => {
         value: filteredEvents.length,
       };
     });
-    return data;
+    return data.filter((genre) => genre.value > 0);
   };
 
   useEffect(() => {
