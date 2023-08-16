@@ -7,14 +7,13 @@ import {
   Cell,
   LabelList,
   Legend,
-  Title,
 } from "recharts";
 
 const EventGenresChart = ({ events, isLoading }) => {
   const [data, setData] = useState([]);
 
   const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
-  const COLORS = ["#0fb5af", "#4147cb", "#f78511", "#df3d83", "#7f85fb"];
+  const colors = ["#0fb5af", "#4147cb", "#f78511", "#df3d83", "#7f85fb"];
 
   const nonZero = (data) =>
     data.filter((genre) => genre.value > 0).map((el) => el.name);
@@ -28,7 +27,7 @@ const EventGenresChart = ({ events, isLoading }) => {
   const percent = (value, data) =>
     ((value / sumEvents(data)) * 100).toFixed(0).toString() + "%";
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div
@@ -105,7 +104,7 @@ const EventGenresChart = ({ events, isLoading }) => {
         >
           <LabelList fill="white" dataKey={customPercentage} stroke="none" />
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
           ))}
         </Pie>
         <Tooltip

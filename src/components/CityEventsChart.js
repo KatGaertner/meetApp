@@ -27,7 +27,7 @@ const CityEventsChart = ({ allLocations, events, isLoading }) => {
     return data;
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
         <div className="custom-tooltip">
@@ -39,7 +39,6 @@ const CityEventsChart = ({ allLocations, events, isLoading }) => {
         </div>
       );
     }
-
     return null;
   };
 
