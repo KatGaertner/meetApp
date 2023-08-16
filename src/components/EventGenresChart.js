@@ -7,6 +7,7 @@ import {
   Cell,
   LabelList,
   Legend,
+  Title,
 } from "recharts";
 
 const EventGenresChart = ({ events, isLoading }) => {
@@ -68,8 +69,18 @@ const EventGenresChart = ({ events, isLoading }) => {
   }, [`${data}`, events]);
 
   return (
-    <ResponsiveContainer width="99%" height={320}>
-      <PieChart margin={{ top: 5, left: 5, right: 5, bottom: 5 }}>
+    <ResponsiveContainer width="99%" height={400}>
+      <PieChart margin={{ top: 35, left: 5, right: 5, bottom: 60 }}>
+        <text
+          x="50%"
+          y="0"
+          dy={25}
+          style={{ fontSize: 16, fontWeight: "bold" }}
+          scaleToFit={true}
+          textAnchor="middle"
+        >
+          Event Topics
+        </text>
         <Pie
           data={data}
           dataKey="value"
