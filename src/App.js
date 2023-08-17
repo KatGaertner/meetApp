@@ -23,7 +23,7 @@ const App = () => {
     if (allEvents.length === 0) {
       const data = await getEvents();
       setLoading(false);
-      if (data.length > 0) {
+      if (data?.length > 0) {
         setAllEvents(data);
       } else {
         setWarningAlert("Could not fetch events.");
