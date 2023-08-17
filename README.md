@@ -32,6 +32,7 @@ This project utilizes:
 - [Atatus](https://www.atatus.com/): Monitors app performance and tracks errors for better stability.
 - [Recharts](https://recharts.org/): A charting library for creating dynamic and interactive visualizations.
 
+<a name="webpage-cut"></a>
 ## To Do
 
 - The accessibility of the app needs improvement to ensure inclusivity for all users.
